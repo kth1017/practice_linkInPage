@@ -5,6 +5,10 @@ import java.util.List;
 public class Logic {
     public static void main(String[] args) throws IOException {
 
+        /*
+        준비
+         */
+
         // 텍스트 불러오기
         FileReader reader = new FileReader("D:\\input.txt");
 
@@ -32,7 +36,12 @@ public class Logic {
                 oldTitleList.add(startTextArrBySpace[i+1]);
             }
         }
-        // 타이틀별 id 추가
+
+        /*
+        기능 추가
+         */
+
+        // 기능1 타이틀마다 id 추가
 
         String splitTitleKeyword = "blockquote data-ke-size=\"size16\" data-ke-style=\"style1\">";
         String[] inputTextArrByBrak =  inputText.split(splitTitleKeyword);
@@ -44,7 +53,7 @@ public class Logic {
             addTitleText += inputTextArrByBrak[i];
         }
 
-        // index 작성
+        // 기능2 상단 index 자동완성
         String[] resultArr = addTitleText.split("Index");
         String resultText = resultArr[0]+"Index";
 
@@ -58,6 +67,10 @@ public class Logic {
             resultText += "<br /><a href=\"#"+j+"th\">"+j+" "+titleList.get(i)+"</a>";
         }
         resultText += resultArr[1];
+
+        /*
+        결과 출력
+         */
 
         // reult.txt 생성
         try {
