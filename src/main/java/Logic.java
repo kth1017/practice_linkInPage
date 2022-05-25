@@ -1,4 +1,6 @@
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Logic {
     public static void main(String[] args) throws IOException {
@@ -13,7 +15,7 @@ public class Logic {
         }
 
 
-        // 인덱스 개수
+        // 인덱스 개수 + 타이틀 저장
         int startIndex = inputText.indexOf("Index");
         String startText = inputText.substring(startIndex);
 
@@ -22,12 +24,14 @@ public class Logic {
 
         String[] startTextArrBySpace = startText.split("<");
         int textLen = startTextArrBySpace.length;
+        List<String> oldTitleList = new ArrayList<>();
         for (int i = 0; i < textLen; i++) {
             if (startTextArrBySpace[i].equals(countTitleKeyword)) {
                 count++;
+                // 타이틀명 스트림으로 저장
+                oldTitleList.add(startTextArrBySpace[i+1]);
             }
         }
-
         // 타이틀별 id 추가
 
         String splitTitleKeyword = "blockquote data-ke-size=\"size16\" data-ke-style=\"style1\">";
@@ -42,13 +46,18 @@ public class Logic {
 
         // index 작성
         String[] resultArr = addTitleText.split("Index");
-        System.out.println(resultArr[1]);
-        String resultText = "";
+        String resultText = resultArr[0]+"Index";
 
+        List<String> titleList = new ArrayList<>();
+        for (int i = 0; i < oldTitleList.size(); i++) {
+            titleList.add(oldTitleList.get(i).split(">")[1]);;
+        }
 
-
-
-
+        for (int i = 0; i < titleList.size(); i++) {
+            int j = i+1;
+            resultText += "<br /><a href=\"#"+j+"th\">"+j+" "+titleList.get(i)+"</a>";
+        }
+        resultText += resultArr[1];
 
         // reult.txt 생성
         try {
@@ -67,7 +76,7 @@ public class Logic {
             FileWriter fw = new FileWriter(file);
             PrintWriter pw = new PrintWriter(fw);
 
-            pw.write(addTitleText);
+            pw.write(resultText);
             pw.close();
 
         } catch (IOException e) {
