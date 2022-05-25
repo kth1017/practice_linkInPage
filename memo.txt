@@ -1,0 +1,7 @@
+! NoClassDefFoundError: org/apache/tools/ant/util/ReaderInputStream  문제
+- 클래스 참조 불가 / 그래들 싱크 문제, 그래들 재다운이나 캐시 지우기로 해결
+
+! error: unmappable character (0xED) for encoding x-windows-949 // ?��?��?�� 불러?���?
+- 빌드툴 gradle > 인텔리제이 해결 / 아마 그래들 자체는 인코딩이 안되는 듯
+
+
